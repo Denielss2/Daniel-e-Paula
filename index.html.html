@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metas do casal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2545; --navy2:#13315C; --teal:#0E9F8E; --teal-d:#0A7D70; --mint:#2DD4BF; --teal-soft:#E6F6F3;
+  --bg:#F4F7FA; --card:#fff; --line:#DDE5EE; --muted:#5B6B80;
+  --serif:'Fraunces',Georgia,serif; --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--navy);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+
+/* Hero */
+.hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:40px 0 36px}
+.hero .sub{color:#B9C7DB;font-size:.95rem}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:4px 0 26px}
+.pct{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.pct span{font-family:var(--serif);font-weight:500;font-size:clamp(3.4rem,10vw,6rem);line-height:1;color:var(--mint);font-variant-numeric:tabular-nums}
+.pct small{color:#B9C7DB;font-size:1rem}
+.bar{display:flex;gap:4px;height:16px}
+.bar i{flex:1;background:rgba(255,255,255,.14);border-radius:4px;overflow:hidden;min-width:6px}
+.bar b{display:block;height:100%;width:0;background:var(--mint);transition:width .6s cubic-bezier(.3,.7,.2,1)}
+.hint{color:#8FA3BF;font-size:.8rem;margin-top:8px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);margin-top:32px;border-top:1px solid rgba(255,255,255,.16)}
+.kpi{padding:20px 20px 0 0}
+.kpi + .kpi{padding-left:24px;border-left:1px solid rgba(255,255,255,.16)}
+.kpi p{color:#B9C7DB;font-size:.88rem}
+.kpi strong{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(1.4rem,3.2vw,2rem);margin:2px 0;font-variant-numeric:tabular-nums}
+.kpi em{font-style:normal;color:#8FA3BF;font-size:.8rem}
+
+/* Sections */
+main{padding:36px 0 120px}
+h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin-bottom:4px}
+.lead{color:var(--muted);font-size:.95rem;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;transition:border-color .35s,background-color .35s,box-shadow .35s}
+.card.done{border-color:var(--teal);background:linear-gradient(180deg,var(--teal-soft),#fff 55%);box-shadow:0 4px 18px rgba(14,159,142,.12)}
+.card header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1.2rem;flex:1}
+.pill{font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:99px;background:#E8EDF4;color:var(--muted);transition:background-color .35s,color .35s}
+.done .pill{background:var(--teal);color:#fff}
+.edit{border:0;background:none;cursor:pointer;color:var(--muted);padding:4px;border-radius:6px;display:grid}
+.edit:hover{color:var(--navy);background:#EEF2F7}
+.card ul{list-style:none;padding:0;flex:1;margin-bottom:14px}
+.card li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.card li b{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.card .tot{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.card .tot small{color:var(--muted)}
+.card .tot strong{font-family:var(--serif);font-size:1.35rem;font-weight:600;font-variant-numeric:tabular-nums}
+.card .each{color:var(--muted);font-size:.82rem;margin-bottom:14px}
+.toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid var(--navy);background:#fff;color:var(--navy);font-weight:600;cursor:pointer;transition:background-color .3s,color .3s,border-color .3s,transform .15s}
+.toggle:hover{background:var(--navy);color:#fff}
+.toggle:active{transform:scale(.98)}
+.toggle svg{width:0;height:18px;transition:width .3s}
+.toggle path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s .1s}
+.done .toggle{background:var(--teal);border-color:var(--teal);color:#fff}
+.done .toggle:hover{background:var(--teal-d);border-color:var(--teal-d)}
+.done .toggle svg{width:18px}
+.done .toggle path{stroke-dashoffset:0}
+
+/* Summary */
+.summary{margin-top:44px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:22px}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0 18px}
+.person{background:var(--bg);border-radius:12px;padding:16px}
+.person input{border:0;border-bottom:1.5px dashed var(--line);background:transparent;font-weight:700;width:100%;padding:2px 0 4px;margin-bottom:8px}
+.person input:focus{outline:none;border-color:var(--teal)}
+.person strong{display:block;font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--teal-d);font-variant-numeric:tabular-nums}
+.person p{color:var(--muted);font-size:.85rem}
+.meter{height:8px;background:#E2E9F1;border-radius:99px;overflow:hidden;margin:10px 0 6px}
+.meter b{display:block;height:100%;width:0;background:var(--teal);transition:width .6s}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{padding:10px 16px;border-radius:10px;border:1.5px solid var(--navy);background:#fff;font-weight:600;cursor:pointer}
+.btn:hover{background:#EEF2F7}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy2)}
+.btn.link{border-color:transparent;color:var(--muted);font-weight:500}
+.btn.danger{border-color:#C0392B;color:#C0392B}
+
+/* FAB */
+.fab{position:fixed;right:20px;bottom:20px;display:flex;align-items:center;gap:10px;padding:14px 20px 14px 16px;border:0;border-radius:99px;background:var(--teal);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(11,37,69,.28);transition:transform .15s,background-color .2s;z-index:5}
+.fab:hover{background:var(--teal-d)}
+.fab:active{transform:scale(.97)}
+
+/* Dialog */
+dialog{border:0;border-radius:16px;padding:0;width:min(560px,calc(100% - 24px));max-height:calc(100% - 24px);box-shadow:0 24px 60px rgba(11,37,69,.35);color:var(--navy)}
+dialog::backdrop{background:rgba(11,37,69,.55)}
+.dlg{padding:22px;display:flex;flex-direction:column;gap:14px}
+.dlg label{font-size:.85rem;color:var(--muted);font-weight:600}
+.dlg select,.row input{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.dlg select:focus,.row input:focus{outline:none;border-color:var(--teal)}
+.row{display:grid;grid-template-columns:1fr 120px 36px;gap:8px;margin-bottom:8px}
+.row button{border:0;background:none;color:var(--muted);cursor:pointer;border-radius:8px;font-size:1.2rem}
+.row button:hover{background:#FDECEA;color:#C0392B}
+.dfoot{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:4px}
+.dfoot .left{margin-right:auto}
+
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;font-size:.9rem;opacity:0;pointer-events:none;transition:.3s;z-index:10}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.syncbtn{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer}
+.syncbtn:hover{background:rgba(255,255,255,.16)}
+.syncbtn .dot{width:8px;height:8px;border-radius:50%;background:#8FA3BF;transition:background-color .3s}
+.syncbtn[data-s=on] .dot{background:var(--mint)}
+.syncbtn[data-s=busy] .dot{background:#F4B740}
+.syncbtn[data-s=off] .dot{background:#F0705F}
+.dlg .f{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.dlg .f:focus{outline:none;border-color:var(--teal)}
+.dlg details{font-size:.88rem;color:var(--muted)}
+.dlg summary{cursor:pointer;font-weight:600;color:var(--navy)}
+.dlg ol{padding-left:18px;margin-top:8px}
+.dlg pre{background:var(--bg);padding:10px;border-radius:8px;overflow:auto;font-size:.76rem;margin:8px 0;white-space:pre-wrap;word-break:break-all}
+
+@media (max-width:640px){
+  .kpis{grid-template-columns:1fr}
+  .kpi,.kpi + .kpi{padding:14px 0;border-left:0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .people{grid-template-columns:1fr}
+  .fab span{display:none}.fab{padding:16px}
+  .row{grid-template-columns:1fr 100px 32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="topline"><p class="sub" id="sub"></p>
+    <button class="syncbtn" id="btnSync" data-s=""><i class="dot"></i><span id="syncTxt">Sincronizar</span></button></div>
+  <h1>Metas do casal</h1>
+  <div class="pct"><span id="pct">0</span><small>% concluído</small></div>
+  <div class="bar" id="bar" role="progressbar" aria-label="Progresso geral" aria-valuemin="0" aria-valuemax="100"></div>
+  <p class="hint">Cada bloco é um mês, com largura proporcional ao valor.</p>
+  <div class="kpis">
+    <div class="kpi"><p>Valor total restante</p><strong id="left"></strong><em id="leftSub"></em></div>
+    <div class="kpi"><p>Prazo de quitação</p><strong id="deadline"></strong><em id="deadlineSub"></em></div>
+    <div class="kpi"><p>Meta mensal por pessoa</p><strong id="goal"></strong><em>total dividido pelo prazo e por 2 pessoas</em></div>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <h2>Cronograma</h2>
+  <p class="lead">Marque cada mês como concluído quando o pagamento for feito.</p>
+  <section class="grid" id="grid" aria-label="Meses do cronograma"></section>
+
+  <section class="summary" aria-labelledby="sumT">
+    <h2 id="sumT">Quanto cada um já investiu</h2>
+    <p class="lead" style="margin-bottom:0">Os meses concluídos são divididos igualmente entre os dois.</p>
+    <div class="people" id="people"></div>
+    <div class="actions">
+      <button class="btn primary" id="btnCsv">Exportar CSV</button>
+      <button class="btn" id="btnCopy">Copiar resumo</button>
+      <button class="btn link" id="btnReset">Restaurar dados originais</button>
+    </div>
+  </section>
+</main>
+
+<button class="fab" id="fab" aria-label="Adicionar ou ajustar itens">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  <span>Adicionar ou ajustar itens</span>
+</button>
+
+<dialog id="dlg" aria-labelledby="dT">
+  <div class="dlg">
+    <h2 id="dT">Adicionar ou ajustar itens</h2>
+    <div><label for="mSel">Mês</label><select id="mSel"></select></div>
+    <div id="rows"></div>
+    <button class="btn" id="addRow" style="align-self:flex-start">Adicionar item</button>
+    <div class="dfoot">
+      <button class="btn danger left" id="delMonth">Excluir este mês</button>
+      <button class="btn link" id="cancel">Cancelar</button>
+      <button class="btn primary" id="save">Salvar alterações</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="sdlg" aria-labelledby="sT">
+  <div class="dlg">
+    <h2 id="sT">Sincronizar entre aparelhos</h2>
+    <p class="lead" style="margin:0">Os dois aparelhos usam a mesma URL e o mesmo código. O que um marcar aparece no outro em poucos segundos.</p>
+    <div><label for="sUrl">URL do Realtime Database</label>
+      <input class="f" id="sUrl" placeholder="https://seu-projeto-default-rtdb.firebaseio.com" inputmode="url" autocomplete="off"></div>
+    <div><label for="sCode">Código do casal</label><input class="f" id="sCode" autocomplete="off" maxlength="40"></div>
+    <details><summary>Como criar o banco gratuito (uma vez só)</summary>
+      <ol>
+        <li>Entre em console.firebase.google.com e crie um projeto (pode desativar o Google Analytics).</li>
+        <li>Abra Realtime Database e clique em criar banco de dados, no modo bloqueado.</li>
+        <li>Na aba Regras, cole o texto abaixo e publique.</li>
+        <li>Copie a URL que aparece no topo da aba Dados e cole no campo acima.</li>
+      </ol>
+      <pre>{"rules":{"rooms":{"$code":{".read":true,".write":true,".validate":"newData.hasChildren(['ts','d'])"}}}}</pre>
+    </details>
+    <div class="dfoot">
+      <button class="btn danger left" id="sOff">Desativar</button>
+      <button class="btn" id="sCopy">Copiar convite</button>
+      <button class="btn link" id="sClose">Fechar</button>
+      <button class="btn primary" id="sOn">Ativar</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const KEY = 'metas-casal-v1';
+const SEED = [
+  [['Mesa',520],['Rack da Sala',400],['Karaokê',600]],
+  [['Guarda-roupa',700],['Piso',700]],
+  [['Chácara (restante)',850],['Cabine de Fotos',850]],
+  [['Barraca de Açaí',800],['Luzes',500],['Fliperama',400]],
+  [['Decoração',1065]],
+  [['Sofá',1400]],
+  [['Máquina de Lavar',1800]],
+  [['Geladeira',1900]]
+];
+const fresh = () => ({ ts:0, people:['Pessoa 1','Pessoa 2'], months: SEED.map(m => ({ done:false, items:m.map(([n,v]) => ({n,v})) })) });
+let S; try { S = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
+if (!S || !Array.isArray(S.months)) S = fresh();
+const saveLocal = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const save = () => { S.ts = Date.now(); saveLocal(); push(); };
+
+const $ = s => document.querySelector(s);
+const brl = v => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v);
+const tot = m => m.items.reduce((a,i) => a + Number(i.v || 0), 0);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tt;
+const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2200); };
+
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+const PENCIL = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>';
+
+function renderCards() {
+  $('#grid').innerHTML = S.months.map((m, i) => `
+    <article class="card" data-i="${i}">
+      <header><h3>Mês ${i+1}</h3><span class="pill"></span>
+        <button class="edit" data-edit="${i}" aria-label="Editar mês ${i+1}">${PENCIL}</button></header>
+      <ul>${m.items.map(x => `<li><span>${esc(x.n)}</span><b>${brl(Number(x.v))}</b></li>`).join('')}</ul>
+      <div class="tot"><small>Total do mês</small><strong>${brl(tot(m))}</strong></div>
+      <p class="each">${brl(tot(m)/2)} por pessoa</p>
+      <button class="toggle" data-toggle="${i}" aria-pressed="false">${CHECK}<span></span></button>
+    </article>`).join('');
+  $('#bar').innerHTML = S.months.map((m, i) => `<i style="flex:${Math.max(tot(m),1)}" title="Mês ${i+1}: ${brl(tot(m))}"><b></b></i>`).join('');
+  $('#people').innerHTML = [0,1].map(k => `
+    <div class="person">
+      <input data-name="${k}" value="${esc(S.people[k])}" aria-label="Nome da pessoa ${k+1}" maxlength="24">
+      <strong data-paid="${k}"></strong><p>já investido</p>
+      <div class="meter"><b data-meter="${k}"></b></div>
+      <p data-rest="${k}"></p>
+    </div>`).join('');
+}
+
+function update() {
+  const total = S.months.reduce((a, m) => a + tot(m), 0);
+  const paid = S.months.filter(m => m.done).reduce((a, m) => a + tot(m), 0);
+  const n = S.months.length, doneN = S.months.filter(m => m.done).length;
+  const pct = total ? Math.round(paid / total * 100) : 0;
+  $('#pct').textContent = pct;
+  $('#bar').setAttribute('aria-valuenow', pct);
+  $('#sub').textContent = `Evento e casa nova, quitação em ${n} ${n === 1 ? 'mês' : 'meses'}`;
+  $('#left').textContent = brl(total - paid);
+  $('#leftSub').textContent = `de ${brl(total)} no total`;
+  $('#deadline').textContent = `${n} ${n === 1 ? 'mês' : 'meses'}`;
+  $('#deadlineSub').textContent = n && doneN === n ? 'Tudo quitado' : `${n - doneN} ${n - doneN === 1 ? 'restante' : 'restantes'}`;
+  $('#goal').textContent = brl(n ? total / n / 2 : 0);
+
+  document.querySelectorAll('.card').forEach(c => {
+    const m = S.months[+c.dataset.i];
+    c.classList.toggle('done', m.done);
+    c.querySelector('.pill').textContent = m.done ? 'Concluído' : 'Pendente';
+    c.querySelector('.toggle span').textContent = m.done ? 'Concluído (desfazer)' : 'Marcar como concluído';
+    c.querySelector('.toggle').setAttribute('aria-pressed', m.done);
+  });
+  document.querySelectorAll('#bar b').forEach((b, i) => b.style.width = S.months[i].done ? '100%' : '0');
+
+  const share = total / 2;
+  [0,1].forEach(k => {
+    document.querySelector(`[data-paid="${k}"]`).textContent = brl(paid / 2);
+    document.querySelector(`[data-meter="${k}"]`).style.width = (share ? paid / 2 / share * 100 : 0) + '%';
+    document.querySelector(`[data-rest="${k}"]`).textContent = `Falta ${brl(share - paid / 2)} de ${brl(share)}`;
+  });
+}
+
+/* Interactions */
+$('#grid').addEventListener('click', e => {
+  const t = e.target.closest('[data-toggle]'), ed = e.target.closest('[data-edit]');
+  if (t) { const m = S.months[+t.dataset.toggle]; m.done = !m.done; save(); update(); }
+  if (ed) openDlg(+ed.dataset.edit);
+});
+$('#people').addEventListener('input', e => {
+  if (e.target.dataset.name !== undefined) { S.people[+e.target.dataset.name] = e.target.value || `Pessoa ${+e.target.dataset.name + 1}`; save(); }
+});
+
+/* Dialog */
+const dlg = $('#dlg'); let D;
+function openDlg(i) {
+  if (i === undefined) { i = S.months.findIndex(m => !m.done); if (i < 0) i = 0; }
+  $('#mSel').innerHTML = S.months.map((_, k) => `<option value="${k}">Mês ${k+1}</option>`).join('') + '<option value="new">Novo mês</option>';
+  loadDraft(i); dlg.showModal();
+}
+function loadDraft(i) {
+  i = i === 'new' ? 'new' : Number(i);
+  $('#mSel').value = i;
+  D = { i, items: i === 'new' ? [{n:'',v:''}] : S.months[i].items.map(x => ({...x})) };
+  $('#delMonth').style.display = i !== 'new' && S.months.length > 1 ? '' : 'none';
+  drawRows();
+}
+function drawRows(focusLast) {
+  $('#rows').innerHTML = D.items.map((x, k) => `
+    <div class="row">
+      <input data-k="${k}" data-f="n" value="${esc(x.n)}" placeholder="Nome do item" aria-label="Nome do item">
+      <input data-k="${k}" data-f="v" type="number" min="0" step="0.01" inputmode="decimal" value="${x.v}" placeholder="Valor" aria-label="Valor em reais">
+      <button data-rm="${k}" aria-label="Remover item">&times;</button>
+    </div>`).join('');
+  if (focusLast) { const r = $('#rows').querySelectorAll('.row'); r[r.length - 1].querySelector('input').focus(); }
+}
+$('#rows').addEventListener('input', e => { const k = e.target.dataset.k; if (k !== undefined) D.items[k][e.target.dataset.f] = e.target.value; });
+$('#rows').addEventListener('click', e => { const b = e.target.closest('[data-rm]'); if (b) { D.items.splice(+b.dataset.rm, 1); drawRows(); } });
+$('#addRow').onclick = () => { D.items.push({n:'',v:''}); drawRows(true); };
+$('#mSel').onchange = e => loadDraft(e.target.value);
+$('#cancel').onclick = () => dlg.close();
+$('#fab').onclick = () => openDlg();
+$('#save').onclick = () => {
+  const items = D.items.map(x => ({ n: String(x.n).trim(), v: Math.max(0, Number(x.v) || 0) })).filter(x => x.n || x.v).map(x => ({ n: x.n || 'Item sem nome', v: x.v }));
+  if (!items.length) { toast('Adicione ao menos um item com nome ou valor'); return; }
+  if (D.i === 'new') S.months.push({ done:false, items }); else S.months[D.i].items = items;
+  save(); renderCards(); update(); dlg.close(); toast('Alterações salvas');
+};
+$('#delMonth').onclick = () => {
+  if (!confirm(`Excluir o mês ${D.i + 1} e todos os seus itens?`)) return;
+  S.months.splice(D.i, 1); save(); renderCards(); update(); dlg.close(); toast('Mês excluído');
+};
+
+/* Export */
+function summaryText() {
+  const total = S.months.reduce((a, m) => a + tot(m), 0);
+  const paid = S.months.filter(m => m.done).reduce((a, m) => a + tot(m), 0);
+  return [`Metas do casal, ${S.months.length} meses`,
+    `Total: ${brl(total)} | Pago: ${brl(paid)} | Restante: ${brl(total - paid)}`,
+    `${S.people[0]}: ${brl(paid/2)} investido | ${S.people[1]}: ${brl(paid/2)} investido`, '',
+    ...S.months.map((m, i) => `Mês ${i+1} (${m.done ? 'Concluído' : 'Pendente'}): ${m.items.map(x => x.n).join(', ')} = ${brl(tot(m))}`)].join('\n');
+}
+$('#btnCsv').onclick = () => {
+  const r = [['Mês','Item','Valor (R$)','Status']];
+  S.months.forEach((m, i) => m.items.forEach(x => r.push([`Mês ${i+1}`, x.n, Number(x.v).toFixed(2).replace('.', ','), m.done ? 'Concluído' : 'Pendente'])));
+  const txt = '\ufeff' + r.map(a => a.map(c => `"${String(c).replace(/"/g, '""')}"`).join(';')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([txt], { type:'text/csv;charset=utf-8' }));
+  a.download = 'metas-casal.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('CSV exportado');
+};
+$('#btnCopy').onclick = async () => {
+  try { await navigator.clipboard.writeText(summaryText()); toast('Resumo copiado'); }
+  catch(e) { prompt('Copie o resumo:', summaryText()); }
+};
+$('#btnReset').onclick = () => {
+  if (!confirm('Restaurar os dados originais? Suas alterações e meses concluídos serão perdidos.')) return;
+  S = fresh(); save(); renderCards(); update(); toast('Dados originais restaurados');
+};
+
+renderCards(); update();
+
+/* Sincronização (Firebase Realtime Database via REST, sem SDK) */
+const SKEY = 'metas-casal-sync';
+let C = null, es = null, pushT, pullT, adopted = false;
+try { C = JSON.parse(localStorage.getItem(SKEY)); } catch(e) {}
+const hm = location.hash.match(/^#sync=([^~]+)~([\w-]+)$/);
+if (hm) {
+  C = { url: decodeURIComponent(hm[1]), code: hm[2] }; adopted = true;
+  try { localStorage.setItem(SKEY, JSON.stringify(C)); } catch(e) {}
+  history.replaceState(null, '', location.pathname + location.search);
+}
+const base = () => C.url.replace(/\/+$/, '') + '/rooms/' + encodeURIComponent(C.code) + '.json';
+function setStatus(s, txt) { $('#btnSync').dataset.s = s; $('#syncTxt').textContent = txt; }
+async function put() {
+  const r = await fetch(base(), { method:'PUT', body: JSON.stringify({ ts: S.ts, d: JSON.stringify(S) }) });
+  if (!r.ok) throw new Error(r.status);
+}
+function push() {
+  if (!C) return; clearTimeout(pushT); setStatus('busy', 'Enviando…');
+  pushT = setTimeout(async () => { try { await put(); setStatus('on', 'Sincronizado'); } catch(e) { setStatus('off', 'Sem conexão'); } }, 400);
+}
+async function pull(first) {
+  const r = await fetch(base()); if (!r.ok) throw new Error(r.status);
+  const R = await r.json();
+  if (!R || !R.d) { if (!S.ts) { S.ts = Date.now(); saveLocal(); } await put(); return; }
+  if (R.ts === S.ts) return;
+  if (first && S.ts && !confirm('Já existem dados online com este código.\n\nOK: usar os dados online (substitui os deste aparelho).\nCancelar: enviar os dados deste aparelho.')) {
+    S.ts = Date.now(); saveLocal(); await put(); return;
+  }
+  if (!first && R.ts < S.ts) { await put(); return; }
+  try {
+    const N = JSON.parse(R.d);
+    if (N && Array.isArray(N.months) && N.months.length) {
+      S = N; S.ts = R.ts; saveLocal(); renderCards(); update();
+      if (!first) toast('Atualizado pelo outro aparelho');
+    }
+  } catch(e) {}
+}
+function stopStream() { if (es) { es.close(); es = null; } }
+async function startSync(first) {
+  stopStream(); setStatus('busy', 'Conectando…');
+  try {
+    await pull(first);
+    es = new EventSource(base());
+    const h = () => { clearTimeout(pullT); pullT = setTimeout(() => pull(false).then(() => setStatus('on', 'Sincronizado')).catch(() => setStatus('off', 'Sem conexão')), 250); };
+    es.addEventListener('put', h); es.addEventListener('patch', h);
+    es.onopen = () => setStatus('on', 'Sincronizado');
+    es.onerror = () => setStatus('off', 'Sem conexão');
+    setStatus('on', 'Sincronizado');
+  } catch(e) { setStatus('off', 'Sem conexão'); toast('Não foi possível conectar. Confira a URL e as regras do banco.'); }
+}
+
+const sd = $('#sdlg');
+const genCode = () => Array.from(crypto.getRandomValues(new Uint8Array(10)), b => 'abcdefghjkmnpqrstuvwxyz23456789'[b % 31]).join('');
+$('#btnSync').onclick = () => {
+  $('#sUrl').value = C ? C.url : ''; $('#sCode').value = C ? C.code : genCode();
+  $('#sOff').style.display = $('#sCopy').style.display = C ? '' : 'none';
+  $('#sOn').textContent = C ? 'Atualizar' : 'Ativar'; sd.showModal();
+};
+$('#sClose').onclick = () => sd.close();
+$('#sOn').onclick = () => {
+  const url = $('#sUrl').value.trim().replace(/\/+$/, ''), code = $('#sCode').value.trim().replace(/[^\w-]/g, '');
+  if (!/^https:\/\/.+/.test(url) || code.length < 6) { toast('Informe a URL (https://…) e um código com 6 ou mais caracteres'); return; }
+  C = { url, code }; try { localStorage.setItem(SKEY, JSON.stringify(C)); } catch(e) {}
+  sd.close(); startSync(true);
+};
+$('#sOff').onclick = () => {
+  stopStream(); C = null; try { localStorage.removeItem(SKEY); } catch(e) {}
+  setStatus('', 'Sincronizar'); sd.close(); toast('Sincronização desativada. Os dados continuam neste aparelho.');
+};
+$('#sCopy').onclick = async () => {
+  const link = location.protocol.indexOf('http') === 0 ? location.href.split('#')[0] + '#sync=' + encodeURIComponent(C.url) + '~' + C.code : null;
+  const txt = link || `URL: ${C.url}\nCódigo: ${C.code}`;
+  try { await navigator.clipboard.writeText(txt); toast(link ? 'Link de convite copiado' : 'URL e código copiados'); }
+  catch(e) { prompt('Copie o convite:', txt); }
+};
+if (C) startSync(adopted);
+</script>
+</body>
+</html>
